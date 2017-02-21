@@ -20,6 +20,7 @@ class Territory:
         print "Troops: " + str(self.troops)
 
     def attack_max(self):
+        # print self.troops
         attackers = self.troops - 1
         if attackers > 3:
             attackers = 3
