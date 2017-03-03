@@ -13,6 +13,19 @@ def pl(list_):
         print i
 
 
+def base_case(args, return_queue=None):
+    a_troops = args[0]
+    b_troops = args[1]
+    a = Territory("A", "Leon", a_troops)
+    b = Territory("B", "Leon", b_troops)
+    while(a.attack_max() > 0 and b.defend_max() > 0):
+        game.attack(a, a.attack_max(), b, b.defend_max())
+    if return_queue is None:
+        return a.troops, b.troops
+    else:
+        return_queue.put([a.troops, b.troops])
+
+
 def fort_bunker_case(args, return_queue=None):
     a_troops = args[0]
     b_troops = args[1]
@@ -227,8 +240,8 @@ def main(args=None):
     # write_csv(gen_table(30, fort_case), "fort_case.csv")
     # write_csv(gen_table(30, bunker_case), "bunker_case.csv")
     # write_csv(gen_table(30, ammo_shortage_case), "ammo_shortage_case.csv")
-    write_csv(gen_table(30, well_armed_ammo_shortage_case),
-              "well_armed_ammo_shortage_case.csv")
+    # write_csv(gen_table(30, well_armed_ammo_shortage_case),
+    #           "well_armed_ammo_shortage_case.csv")
     # print "Starting fort_bunker_well_armed_case"
     # write_csv(gen_table(30, fort_bunker_well_armed_case),
     #           "fort_bunker_well_armed_case.csv")
@@ -241,6 +254,9 @@ def main(args=None):
     # print "Starting well_armed_case"
     # write_csv(gen_table(30, well_armed_case),
     #           "well_armed_case.csv")
+    print "Starting base_case"
+    write_csv(gen_table(30, base_case),
+              "base_case.csv")
     end = timer()
     print "Run Time:       ", (end - start)
 
