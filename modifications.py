@@ -1,3 +1,6 @@
+import random
+
+
 def base(dice):
     return dice
 
@@ -43,6 +46,15 @@ def nuke(dice):
 def well_armed(dice):
     # print "well_armed"
     for i in range(len(dice)):
-        dice[i] += 1
+        if dice[i] > 6:
+            dice[i] += 1
+    dice.sort(reverse=True)
+    return dice
+
+
+def rivalry(dice):
+    for i in range(len(dice)):
+        if dice[i] == 1:
+            dice[i] = random.randint(1, 5) + 1
     dice.sort(reverse=True)
     return dice

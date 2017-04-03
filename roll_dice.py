@@ -55,7 +55,13 @@ def risk_dice_roll_modified(attackers, attack_modifications,
     p(defence_dice)
 
     for i in range(defenders):
-        if attack_dice[i] <= defence_dice[i]:
+        attacker = attack_dice[i]
+        defender = defence_dice[i]
+        if attacker > 6:
+            attacker = 6
+        if defender > 6:
+            attacker = 6
+        if attacker <= defender:
             attacker_losses += 1
         else:
             defender_losses += 1
